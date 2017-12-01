@@ -1,10 +1,12 @@
 package com.example.acer.retrofit;
 
 import com.google.gson.Gson;
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import java.io.IOException;
 import java.util.concurrent.Executor;
 
+import io.reactivex.plugins.RxJavaPlugins;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -22,6 +24,7 @@ public class RestClient {
 
     private static Retrofit.Builder builder=new Retrofit.Builder()
                            .baseUrl("https://jsonplaceholder.typicode.com/")
+                           .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                            .addConverterFactory(GsonConverterFactory.create());
 
     public static <S> S createServie(Class<S> serviceClass){
